@@ -24,3 +24,8 @@ and course_crn in (SELECT crn FROM courses WHERE name = 'CSC275')
 
 /* counting the number of majors that each student has declared */
 SELECT student_id, COUNT(dept_id) AS MajorsCount FROM majorsln GROUP BY student_id
+
+/*Finding all courses taken by BIF majors */
+SELECT DISTINCT course_crn FROM enrolled WHERE student_id in 
+(SELECT student_id FROM majorsln WHERE dept_id in
+(SELECT id FROM departments WHERE name = 'BIF'))
