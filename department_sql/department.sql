@@ -16,3 +16,8 @@ WHERE id NOT IN (SELECT DISTINCT student_id FROM enrolled);
 /* counting the number of CS students enrolled in any course */
 SELECT count(*) FROM enrolled WHERE student_id in 
 (SELECT student_id FROM majorsln WHERE dept_id in (SELECT id FROM departments WHERE name = 'CS'))
+
+/* counting the number of CS students enrolled in CSC275 */
+SELECT count(*) FROM enrolled WHERE student_id in 
+(SELECT student_id FROM majorsln WHERE dept_id in (SELECT id FROM departments WHERE name = 'CS')) 
+and course_crn in (SELECT crn FROM courses WHERE name = 'CSC275')
